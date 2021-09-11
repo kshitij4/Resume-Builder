@@ -1,0 +1,173 @@
+<body>
+  <div #contentToConvert class="wrapper mt-lg-5">
+    <div class="sidebar-wrapper">
+      <div class="profile-container">
+        <div class="download">
+          <button *ngIf="displayIcon" mat-icon-button (click)="downloadPdf()">
+            <mat-icon aria-hidden="true" aria-label="Example info icon"
+              >file_download</mat-icon
+            >
+          </button>
+        </div>
+        <h1 class="name">{{ data.firstname }} {{ data.lastname }}</h1>
+        <h3 class="tagline">{{ data.profession }}</h3>
+      </div>
+      <div class="contact-container container-block">
+        <ul class="list-unstyled contact-list">
+          <li class="email">
+            <span
+              ><a href="mailto: {{ data.email }}">
+                <mat-icon aria-hidden="true" aria-label="Example email icon"
+                  >email</mat-icon
+                >
+                {{ data.email }}</a
+              ></span
+            >
+          </li>
+
+          <li class="phone">
+            <a href="tel:{{ data.phone }}"
+              ><mat-icon aria-hidden="true" aria-label="Example phone icon"
+                >phone</mat-icon
+              >
+              {{ data.phone }}</a
+            >
+          </li>
+          <li class="address">
+            <span
+              ><mat-icon aria-hidden="true" aria-label="Example address icon"
+                >room</mat-icon
+              >
+              {{ data.address }}</span
+            >
+          </li>
+        </ul>
+      </div>
+
+      <div class="education-container container-block">
+        <h2 class="container-block-title">
+          <mat-icon aria-hidden="true" aria-label="Example education icon"
+            >school</mat-icon
+          >
+          Education
+        </h2>
+        <div class="item" *ngFor="let edu of data.education">
+          <h4 class="degree">{{ edu.degree }}</h4>
+          <h5 class="meta">{{ edu.school }}</h5>
+          <div class="time">{{ edu.year }}</div>
+        </div>
+      </div>
+
+      <div class="languages-container container-block">
+        <h2 class="container-block-title">
+          <mat-icon aria-hidden="true" aria-label="Example address icon"
+            >language</mat-icon
+          >
+          Languages
+        </h2>
+        <ul
+          class="list-unstyled interests-list"
+          *ngFor="let lg of data.languages"
+        >
+          <li>
+            {{ lg.lang }} <span class="lang-desc">({{ lg.LProficiency }})</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="interests-container container-block">
+        <h2 class="container-block-title">
+          <mat-icon aria-hidden="true" aria-label="Example address icon"
+            >sports_baseball</mat-icon
+          >
+          Hobbies
+        </h2>
+        <ul
+          class="list-unstyled interests-list"
+          *ngFor="let hob of data.hobbies"
+        >
+          <li>{{ hob.hobbie }}</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="main-wrapper">
+      <section class="section summary-section">
+        <h2 class="section-title">
+          <mat-icon aria-hidden="true" aria-label="Example info icon"
+            >bookmark</mat-icon
+          >
+          Professional Summary
+        </h2>
+        <div class="summary">
+          <p>
+            {{ data.intro }}
+          </p>
+        </div>
+      </section>
+
+      <section class="section experiences-section">
+        <h2 class="section-title">
+          <mat-icon aria-hidden="true" aria-label="work icon">work</mat-icon>
+          Work Experience
+        </h2>
+
+        <div class="item" *ngFor="let exp of data.experience">
+          <div class="meta">
+            <div class="upper-row">
+              <h3 class="job-title">{{ exp.job }}</h3>
+              <div class="time">{{ exp.time }}</div>
+            </div>
+            <div class="company">{{ exp.company }}</div>
+          </div>
+          <div class="details">
+            <p>{{ exp.role }}</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section projects-section">
+        <h2 class="section-title">
+          <mat-icon aria-hidden="true" aria-label="Example address icon"
+            >integration_instructions</mat-icon
+          >
+          Projects
+        </h2>
+        <div class="item" *ngFor="let pro of data.projects">
+          <div class="upper-row">
+            <span class="project-title">{{ pro.title }}</span>
+            <span class="time">{{ pro.duration }} </span>
+            <br />
+          </div>
+          <span class="project-tagline">{{ pro.work }} </span>
+        </div>
+      </section>
+
+      <section class="skills-section section">
+        <h2 class="section-title">
+          <mat-icon aria-hidden="true" aria-label="Example address icon"
+            >assessment</mat-icon
+          >
+          Skills &amp; Proficiency
+        </h2>
+        <div class="skillset">
+          <div class="item" *ngFor="let sk of data.skills">
+            <h3 class="level-title">{{ sk.skill }}</h3>
+            <div class="progress level-bar">
+              <div
+                class="progress-bar theme-progress-bar"
+                role="progressbar"
+                [ngStyle]="{
+                  'width.%': profToNum(sk.SProficiency),
+                  'aria-valuenow': profToNum(sk.SProficiency)
+                }"
+                aria-valuemin="0"
+                aria-valuemax="100"
+              ></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</body>

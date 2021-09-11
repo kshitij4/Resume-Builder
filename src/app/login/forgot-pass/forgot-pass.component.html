@@ -1,0 +1,19 @@
+<mat-toolbar class="mat-elevation-z4"><p>Reset Password</p></mat-toolbar>
+<mat-card>
+  <form (submit)="onSubmit(ForPasForm)" #ForPasForm="ngForm">
+    <mat-form-field appearance="outline">
+      <input
+        type="email"
+        name="email"
+        placeholder="Enter your email to reset password"
+        matInput
+        ngModel
+        required
+      /> </mat-form-field
+    ><br />
+    <button mat-raised-button color="primary" type="submit">Submit</button>
+    <div class="extras">
+      <a routerLink="/login">Back to login</a>
+    </div>
+  </form>
+</mat-card>

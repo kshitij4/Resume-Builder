@@ -1,0 +1,109 @@
+<mat-toolbar><p>Register Page</p></mat-toolbar>
+<mat-card>
+  <form (submit)="onRegister(signupform)" #signupform="ngForm">
+    <mat-form-field appearance="outline">
+      <input
+        type="text"
+        matInput
+        ngModel
+        placeholder="First Name"
+        name="fname"
+        required
+        #fname="ngModel"
+      />
+      <mat-error *ngIf="fname.invalid"
+        >Enter valid name</mat-error
+      > </mat-form-field
+    ><br />
+    <mat-form-field appearance="outline">
+      <input
+        type="text"
+        matInput
+        ngModel
+        placeholder="Last Name"
+        name="lname"
+        #lname="ngModel"
+      />
+      <mat-error *ngIf="lname.invalid"
+        >Enter valid name</mat-error
+      > </mat-form-field
+    ><br />
+    <mat-form-field appearance="outline">
+      <input
+        type="email"
+        matInput
+        ngModel
+        email
+        placeholder="Email"
+        name="email"
+        required
+        #email="ngModel"
+      /><mat-error *ngIf="email.invalid"
+        >Enter valid email</mat-error
+      > </mat-form-field
+    ><br />
+    <div class="radio-inline">
+      <input type="radio" ngModel name="gender" value="male" />Male
+    </div>
+    <div class="radio-inline">
+      <input type="radio" ngModel name="gender" value="female" />Female<br />
+    </div>
+    <br />
+    <mat-form-field appearance="outline">
+      <input
+        type="tel"
+        matInput
+        ngModel
+        name="phone"
+        placeholder="Phone Number"
+        #phone="ngModel"
+      /><mat-error *ngIf="phone.invalid">Enter valid phone number</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <input
+        type="number"
+        name="age"
+        ngModel
+        matInput
+        placeholder="Age"
+        #age="ngModel"
+      />
+      <mat-error *ngIf="age.invalid"
+        >Enter valid age</mat-error
+      > </mat-form-field
+    ><br />
+    <mat-form-field appearance="outline">
+      <input
+        type="password"
+        name="pass"
+        matInput
+        ngModel
+        placeholder="Password"
+        required
+        pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+        #pass="ngModel"
+      />
+      <mat-error *ngIf="pass.invalid"
+        >Enter valid password</mat-error
+      > </mat-form-field
+    ><br />
+    <mat-form-field appearance="outline">
+      <input
+        type="password"
+        matInput
+        ngModel
+        name="cpass"
+        placeholder="Confirm Password"
+        required
+        #cpass="ngModel"
+      />
+      <mat-error *ngIf="cpass.invalid"
+        >Password doesnt match</mat-error
+      > </mat-form-field
+    ><br />
+    <button mat-raised-button color="primary" type="submit">Register</button>
+    <div class="extras">
+      <p class="right">Already a user? <a routerLink="/login">Login</a></p>
+    </div>
+  </form>
+</mat-card>

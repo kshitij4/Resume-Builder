@@ -1,0 +1,19 @@
+footer {
+  padding: 30px;
+  background-color: #272727;
+}
+footer .copyright {
+  line-height: 1.6;
+  color: #fff;
+  font-size: 13px;
+}
+.wrapper {
+  background-color: #BBD1EA;
+  min-height: calc(100vh - 81.6px);
+  height: auto !important;
+}
+.wrapper:after {
+  content: "";
+  display: block;
+  height: 81.6px; 
+}

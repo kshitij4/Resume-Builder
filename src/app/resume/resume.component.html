@@ -1,0 +1,402 @@
+<mat-toolbar class="mat-elevation-z4"><p>Create your Resume</p></mat-toolbar>
+<mat-card>
+  <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="outline">
+      <mat-label>Username</mat-label>
+      <input
+        type="text"
+        matInput
+        required
+        placeholder="Enter your Unique Username"
+        formControlName="username"
+      /> </mat-form-field
+    ><br />
+
+    <mat-form-field appearance="outline">
+      <mat-label>Firstname</mat-label>
+      <input
+        type="text"
+        matInput
+        required
+        placeholder="Enter your Firstname"
+        formControlName="firstname"
+      /> </mat-form-field
+    ><br />
+
+    <mat-form-field appearance="outline">
+      <mat-label>Lastname</mat-label>
+      <input
+        matInput
+        type="text"
+        required
+        placeholder="Enter your Lastname"
+        formControlName="lastname"
+      /> </mat-form-field
+    ><br />
+
+    <mat-form-field appearance="outline">
+      <mat-label>Profession</mat-label>
+      <input
+        matInput
+        type="text"
+        required
+        placeholder="Enter your Profession or Title"
+        formControlName="profession"
+      /> </mat-form-field
+    ><br />
+
+    <mat-form-field appearance="outline">
+      <mat-label>Email</mat-label>
+      <input
+        matInput
+        type="email"
+        email
+        required
+        placeholder="Enter your Email address"
+        formControlName="email"
+      /> </mat-form-field
+    ><br />
+
+    <mat-form-field appearance="outline">
+      <mat-label>Phone</mat-label>
+      <input
+        matInput
+        type="tel"
+        required
+        placeholder="Enter your Phone Number"
+        formControlName="phone"
+      /> </mat-form-field
+    ><br />
+
+    <mat-form-field appearance="outline">
+      <mat-label>Address</mat-label>
+      <textarea
+        formControlName="address"
+        placeholder="Enter your permanent address"
+        rows="4"
+        cols="50"
+        matInput
+      ></textarea></mat-form-field
+    ><br />
+
+    <mat-form-field appearance="outline">
+      <mat-label>Introduction</mat-label>
+      <textarea
+        matInput
+        formControlName="intro"
+        placeholder="Enter your brief Introduction"
+        rows="4"
+        cols="50"
+      ></textarea></mat-form-field
+    ><br />
+
+    <div
+      formArrayName="experience"
+      *ngFor="let exp of experience.controls; let i = index"
+    >
+      <div *ngIf="i == 0">
+        <mat-label>Experience </mat-label>
+        <button
+          type="button"
+          (click)="onAddExp()"
+          [disabled]="experience.invalid"
+          style="border-radius: 50%; margin-left: 8px"
+          class="btn btn-success"
+        >
+          +
+        </button>
+        <button
+          type="button"
+          (click)="onDelExp(i + 1)"
+          style="border-radius: 50%; margin-left: 2px"
+          class="btn btn-danger"
+        >
+          x
+        </button>
+      </div>
+      <mat-form-field appearance="outline" [formGroupName]="i">
+        <mat-form-field appearance="outline">
+          <input
+            matInput
+            type="text"
+            required
+            placeholder="Enter your Job title"
+            formControlName="job"
+          /> </mat-form-field
+        ><br />
+
+        <mat-form-field appearance="outline">
+          <input
+            matInput
+            type="text"
+            required
+            placeholder="Enter the time period in years"
+            formControlName="time"
+          /> </mat-form-field
+        ><br />
+
+        <mat-form-field appearance="outline">
+          <input
+            matInput
+            type="text"
+            required
+            placeholder="Enter your Company Name"
+            formControlName="company"
+          /> </mat-form-field
+        ><br />
+
+        <mat-form-field appearance="outline">
+          <input
+            matInput
+            type="text"
+            required
+            placeholder="Enter your Role in company"
+            formControlName="role"
+          /> </mat-form-field
+        ><br />
+      </mat-form-field>
+    </div>
+
+    <div
+      formArrayName="education"
+      *ngFor="let edu of education.controls; let i = index"
+    >
+      <div *ngIf="i == 0">
+        <mat-label>Education </mat-label>
+        <button
+          type="button"
+          (click)="onAddEdu()"
+          [disabled]="education.invalid"
+          style="border-radius: 50%; margin-left: 8px"
+          class="btn btn-success"
+        >
+          +
+        </button>
+        <button
+          type="button"
+          (click)="onDelEdu(i + 1)"
+          style="border-radius: 50%; margin-left: 2px"
+          class="btn btn-danger"
+        >
+          x
+        </button>
+      </div>
+      <mat-form-field appearance="outline" [formGroupName]="i">
+        <mat-form-field appearance="outline">
+          <input
+            matInput
+            type="text"
+            required
+            placeholder="Enter your School/College name"
+            formControlName="school"
+          /> </mat-form-field
+        ><br />
+
+        <mat-form-field appearance="outline">
+          <input
+            matInput
+            type="text"
+            required
+            placeholder="Enter the time period in years (eg. 2010 - 2015 )"
+            formControlName="year"
+          /> </mat-form-field
+        ><br />
+
+        <mat-form-field appearance="outline">
+          <input
+            matInput
+            type="text"
+            required
+            placeholder="Enter the name of your Degree / Course"
+            formControlName="degree"
+          /> </mat-form-field
+        ><br />
+      </mat-form-field>
+    </div>
+
+    <div
+      formArrayName="skills"
+      *ngFor="let skill of skills.controls; let i = index"
+    >
+      <div *ngIf="i == 0">
+        <mat-label>Skills </mat-label>
+        <button
+          type="button"
+          (click)="onAddSkills()"
+          [disabled]="skills.invalid"
+          style="border-radius: 50%; margin-left: 8px"
+          class="btn btn-success"
+        >
+          +
+        </button>
+        <button
+          type="button"
+          (click)="onDelSkills(i + 1)"
+          style="border-radius: 50%; margin-left: 2px"
+          class="btn btn-danger"
+        >
+          x
+        </button>
+      </div>
+
+      <mat-form-field appearance="outline" [formGroupName]="i">
+        <mat-form-field appearance="outline">
+          <mat-label>Skills</mat-label>
+          <input
+            matInput
+            type="text"
+            placeholder="Enter your skill"
+            formControlName="skill"
+          />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Proficiency</mat-label>
+          <mat-select formControlName="SProficiency">
+            <mat-option *ngFor="let pro of this.sproficiency" [value]="pro">
+              {{ pro }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-form-field>
+    </div>
+
+    <div
+      formArrayName="projects"
+      *ngFor="let pro of projects.controls; let i = index"
+    >
+      <div *ngIf="i == 0">
+        <mat-label>Projects</mat-label>
+        <button
+          type="button"
+          (click)="onAddPro()"
+          [disabled]="projects.invalid"
+          style="border-radius: 50%; margin-left: 8px"
+          class="btn btn-success"
+        >
+          +
+        </button>
+        <button
+          type="button"
+          (click)="onDelPro(i + 1)"
+          style="border-radius: 50%; margin-left: 2px"
+          class="btn btn-danger"
+        >
+          x
+        </button>
+      </div>
+      <mat-form-field appearance="outline" [formGroupName]="i">
+        <mat-form-field appearance="outline">
+          <input
+            matInput
+            type="text"
+            required
+            placeholder="Enter the Title of your Project"
+            formControlName="title"
+          /> </mat-form-field
+        ><br />
+
+        <mat-form-field appearance="outline">
+          <input
+            matInput
+            type="text"
+            required
+            placeholder="Enter the Description of your project"
+            formControlName="work"
+          /> </mat-form-field
+        ><br />
+
+        <mat-form-field appearance="outline">
+          <input
+            matInput
+            type="text"
+            required
+            placeholder="Enter the Duration of your project"
+            formControlName="duration"
+          /> </mat-form-field
+        ><br />
+      </mat-form-field>
+    </div>
+
+    <div
+      formArrayName="languages"
+      *ngFor="let lang of languages.controls; let i = index"
+    >
+      <div *ngIf="i == 0">
+        <mat-label>Languages </mat-label>
+        <button
+          type="button"
+          (click)="onAddLang()"
+          [disabled]="languages.invalid"
+          style="border-radius: 50%; margin-left: 8px"
+          class="btn btn-success"
+        >
+          +
+        </button>
+        <button
+          type="button"
+          (click)="onDelLang(i + 1)"
+          style="border-radius: 50%; margin-left: 2px"
+          class="btn btn-danger"
+        >
+          x
+        </button>
+      </div>
+      <mat-form-field appearance="outline" [formGroupName]="i">
+        <mat-form-field appearance="outline">
+          <mat-label>Language</mat-label>
+          <input
+            matInput
+            type="text"
+            placeholder="Enter language"
+            formControlName="lang"
+          />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Proficiency</mat-label>
+          <mat-select formControlName="LProficiency">
+            <mat-option *ngFor="let pro of this.lproficiency" [value]="pro">
+              {{ pro }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-form-field>
+    </div>
+
+    <div
+      formArrayName="hobbies"
+      *ngFor="let hobbie of hobbies.controls; let i = index"
+    >
+      <div *ngIf="i == 0">
+        <mat-label>Hobbies </mat-label>
+        <button
+          type="button"
+          (click)="onAddHobbies()"
+          [disabled]="hobbies.invalid"
+          style="border-radius: 50%; margin-left: 8px"
+          class="btn btn-success"
+        >
+          +
+        </button>
+        <button
+          type="button"
+          (click)="onDelHobbies(i + 1)"
+          style="border-radius: 50%; margin-left: 2px"
+          class="btn btn-danger"
+        >
+          x
+        </button>
+      </div>
+      <mat-form-field appearance="outline" [formGroupName]="i">
+        <input
+          matInput
+          placeholder="Enter your Hobbie "
+          formControlName="hobbie"
+          type="text" /></mat-form-field
+      ><br />
+    </div>
+
+    <button mat-raised-button color="primary" type="submit">Submit</button>
+  </form>
+</mat-card>

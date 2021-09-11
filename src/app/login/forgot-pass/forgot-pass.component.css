@@ -1,0 +1,21 @@
+mat-card {
+  width: 50vh;
+  margin: auto;
+  margin-top: 2rem;
+}
+mat-toolbar {
+  width: 50vh;
+  margin: auto;
+  margin-top: 2rem;
+  background-color: white;
+}
+mat-form-field {
+  width: 100%;
+}
+button {
+  width: 100%;
+}
+.extras {
+  margin-top: 10px;
+  text-align: center;
+}
