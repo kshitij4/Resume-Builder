@@ -13,11 +13,20 @@ import { ResolverGuard } from './services/resume-resolver.guard';
 import { ProfileResolverGuard } from './services/profile-resolver.guard';
 import { EditComponent } from './profile/edit/edit.component';
 import { ForgotPassComponent } from './login/forgot-pass/forgot-pass.component';
+import { ResetPassComponent } from './login/reset-pass/reset-pass.component';
+import { ResetPassResolverGuard } from './services/reset-pass-resolver.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'forgetPassword', component: ForgotPassComponent },
+  {
+    path: 'reset-password/:id/:token',
+    component: ResetPassComponent,
+    resolve: {
+      userEmail: ResetPassResolverGuard,
+    },
+  },
   { path: 'register', component: RegisterComponent },
   {
     path: 'profile',

@@ -6,7 +6,6 @@ import { environment } from '../../environments/environment';
   providedIn: 'root',
 })
 export class UsersService {
-  // environment.uri = 'http://127.0.0.1:8000';
   private uri = environment.uri;
   constructor(private http: HttpClient) {}
 
@@ -38,21 +37,28 @@ export class UsersService {
     return this.http.get<any>(`${this.uri}/users/profile`);
   }
 
-  // forgetPass(body: any) {
-  //   console.log('aara hu bc');
-  //   return this.http.post(`${this.uri}/users/forgetPassword`, body, {
-  //     observe: 'body',
-  //     withCredentials: true,
-  //     headers: new HttpHeaders().append('Content-Type', 'application/json'),
-  //   });
-  // }
-
   forgetPass(body: any) {
     return this.http.post(`${this.uri}/users/forgetPassword`, body, {
       observe: 'body',
       withCredentials: true,
       headers: new HttpHeaders().append('Content-Type', 'application/json'),
     });
+  }
+
+  getResetPass(id: any, token: any) {
+    return this.http.get(`${this.uri}/users/reset-password/${id}/${token}`);
+  }
+
+  updatePass(id: any, token: any, body: any) {
+    return this.http.post<any>(
+      `${this.uri}/users/reset-password/${id}/${token}`,
+      body,
+      {
+        observe: 'body',
+        withCredentials: true,
+        headers: new HttpHeaders().append('Content-Type', 'application/json'),
+      }
+    );
   }
 
   updateProfile(body: any) {

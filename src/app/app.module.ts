@@ -33,6 +33,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { EditComponent } from './profile/edit/edit.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ForgotPassComponent } from './login/forgot-pass/forgot-pass.component';
+import { ResetPassComponent } from './login/reset-pass/reset-pass.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { ForgotPassComponent } from './login/forgot-pass/forgot-pass.component';
     SearchComponent,
     EditComponent,
     ForgotPassComponent,
+    ResetPassComponent,
   ],
   imports: [
     BrowserModule,
