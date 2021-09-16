@@ -10,6 +10,8 @@ import { dataDisplay } from './profile-model';
   styleUrls: ['./profile.component.css'],
 })
 export class ProfileComponent implements OnInit {
+  err: any;
+  success: any;
   data: dataDisplay;
 
   constructor(
@@ -29,7 +31,7 @@ export class ProfileComponent implements OnInit {
             this.router.navigate(['./logout']);
           }
         } else {
-          alert(err);
+          this.err = err.error;
         }
       }
     );

@@ -9,6 +9,8 @@ import { UsersService } from '../services/users.service';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
+  err: any;
+
   constructor(public router: Router, public userService: UsersService) {}
 
   ngOnInit() {
@@ -19,18 +21,20 @@ export class LoginComponent implements OnInit {
 
   onLogin(form: NgForm) {
     if (form.invalid) {
-      console.log('Invalid Form');
+      this.err = 'Please fill the required details correctly';
       return;
     }
     this.userService.login(JSON.stringify(form.value)).subscribe(
       (data: any) => {
+        this.err = null;
         localStorage.setItem('token', JSON.stringify(data)),
           form.resetForm(),
           this.router.navigate(['/resume']);
       },
       (err) => {
         {
-          alert(err.error);
+          console.log(err.error);
+          this.err = 'Internal Server Error';
         }
       }
     );

@@ -15,6 +15,7 @@ import { EditComponent } from './profile/edit/edit.component';
 import { ForgotPassComponent } from './login/forgot-pass/forgot-pass.component';
 import { ResetPassComponent } from './login/reset-pass/reset-pass.component';
 import { ResetPassResolverGuard } from './services/reset-pass-resolver.guard';
+import { UpdateComponent } from './resume/update/update.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -45,6 +46,13 @@ const routes: Routes = [
     },
   },
   { path: 'resume', component: ResumeComponent, canActivate: [UsersGuard] },
+  {
+    path: 'template/update/:username',
+    component: UpdateComponent,
+    resolve: {
+      resumeData: ResolverGuard,
+    },
+  },
   { path: 'search', component: SearchComponent, canActivate: [UsersGuard] },
   {
     path: 'template/:username',

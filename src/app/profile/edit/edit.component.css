@@ -1,13 +1,22 @@
-mat-card {
-  width: 50vh;
+mat-toolbar,
+mat-card,
+.success,
+.error {
+  width: 25%;
   margin: auto;
   margin-top: 2rem;
 }
-mat-toolbar{
-  width: 50vh;
-  margin: auto;
-  margin-top: 2rem;
+mat-toolbar,
+mat-card {
   background-color: white;
+}
+@media (max-width: 700px) {
+  mat-toolbar,
+  mat-card,
+  .success,
+  .error {
+    width: 50%;
+  }
 }
 mat-form-field {
   width: 100%;

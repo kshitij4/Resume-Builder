@@ -1,4 +1,13 @@
 <mat-toolbar class="mat-elevation-z4"><p>Edit Profile</p></mat-toolbar>
+
+<div class="success" *ngIf="success">
+  <p class="alert alert-success">{{ success }}</p>
+</div>
+
+<div class="error" *ngIf="err">
+  <p class="alert alert-danger">{{ err }}</p>
+</div>
+
 <mat-card>
   <form [formGroup]="myForm" (ngSubmit)="onUpdate()">
     <b>Email :</b>

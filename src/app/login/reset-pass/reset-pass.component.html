@@ -21,8 +21,14 @@
         matInput
         ngModel
         required
-      /> </mat-form-field
-    ><br />
+        pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+        #pass="ngModel"
+      />
+      <mat-error *ngIf="pass.invalid"
+        >Enter valid password.Must have 1 uppercase,1 lowercase letter,1 number,
+        1 special char and atleast 8 characters</mat-error
+      ></mat-form-field
+    ><br /><br />
     <mat-form-field appearance="outline">
       <mat-label>New Password Confirm</mat-label>
       <input

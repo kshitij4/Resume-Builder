@@ -1,5 +1,4 @@
-<mat-toolbar class="mat-elevation-z4"><p>Create your Resume</p></mat-toolbar>
-
+<mat-toolbar class="mat-elevation-z4"><p>Update your Resume</p></mat-toolbar>
 <div class="success" *ngIf="success">
   <p class="alert alert-success">{{ success }}</p>
 </div>
@@ -8,21 +7,20 @@
   <p class="alert alert-danger">{{ err }}</p>
 </div>
 
-<form [formGroup]="myForm" (ngSubmit)="onSubmit()">
-  <mat-card>
+<mat-card>
+  <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
     <mat-form-field appearance="outline">
       <mat-label>Username</mat-label>
       <input
         type="text"
         matInput
         required
-        placeholder="Enter your Unique Username for this resume"
+        [disabled]="true"
+        placeholder="Enter your Unique Username"
         formControlName="username"
-      />
-    </mat-form-field>
-  </mat-card>
+      /> </mat-form-field
+    ><br />
 
-  <mat-card>
     <mat-form-field appearance="outline">
       <mat-label>Firstname</mat-label>
       <input
@@ -408,6 +406,6 @@
       ><br />
     </div>
 
-    <button mat-raised-button color="primary" type="submit">Submit</button>
-  </mat-card>
-</form>
+    <button mat-raised-button color="primary" type="submit">Update</button>
+  </form>
+</mat-card>

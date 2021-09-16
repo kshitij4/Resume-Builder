@@ -2,13 +2,6 @@
   <div #contentToConvert class="wrapper mt-lg-5">
     <div class="sidebar-wrapper">
       <div class="profile-container">
-        <div class="download">
-          <button *ngIf="displayIcon" mat-icon-button (click)="downloadPdf()">
-            <mat-icon aria-hidden="true" aria-label="Example info icon"
-              >file_download</mat-icon
-            >
-          </button>
-        </div>
         <h1 class="name">{{ data.firstname }} {{ data.lastname }}</h1>
         <h3 class="tagline">{{ data.profession }}</h3>
       </div>
@@ -170,4 +163,13 @@
       </section>
     </div>
   </div>
+  <button class="download" mat-icon-button (click)="downloadPdf()">
+    <mat-icon aria-hidden="true" aria-label="Example download icon"
+      >file_download</mat-icon
+    >
+  </button>
+
+  <button class="update" mat-icon-button (click) = "onUpdate()" >
+    <mat-icon aria-hidden="true" aria-label="Example edit icon">edit</mat-icon>
+  </button>
 </body>

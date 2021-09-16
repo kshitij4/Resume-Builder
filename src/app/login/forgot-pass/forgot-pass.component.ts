@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UsersService } from 'src/app/services/users.service';
@@ -8,22 +8,27 @@ import { UsersService } from 'src/app/services/users.service';
   templateUrl: './forgot-pass.component.html',
   styleUrls: ['./forgot-pass.component.css'],
 })
-export class ForgotPassComponent {
-  message: any;
+export class ForgotPassComponent implements OnInit {
+  success: any;
   err: any;
 
   constructor(private usersService: UsersService, private router: Router) {}
+  ngOnInit(): void {
+    if (this.usersService.isLogged()) {
+      this.router.navigate(['/resume']);
+    }
+  }
 
   onSubmit(form: NgForm) {
     if (form.invalid) {
-      console.log('form not valid!!');
+      this.err = 'Please fill the required details correctly';
       return;
     }
     try {
       this.usersService.forgetPass({ email: form.value.email }).subscribe(
         (data) => {
-          this.err =null;
-          this.message = data;
+          this.err = null;
+          this.success = data;
         },
         (err) => {
           console.log(err);

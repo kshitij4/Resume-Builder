@@ -1,11 +1,8 @@
-button {
-  width: 100%;
-}
 mat-toolbar,
 mat-card,
 .success,
-.err {
-  width: 25%;
+.error {
+  width: 35%;
   margin: auto;
   margin-top: 2rem;
 }
@@ -13,17 +10,17 @@ mat-toolbar,
 mat-card {
   background-color: white;
 }
+@media (max-width: 700px) {
+  mat-toolbar,
+  mat-card,
+  .success,
+  .error {
+    width: 60%;
+  }
+}
 mat-form-field {
   width: 100%;
 }
 .mat-radio-button ~ .mat-radio-button {
   margin-left: 16px;
-}
-@media (max-width: 700px) {
-  mat-toolbar,
-  mat-card,
-  .success,
-  .err {
-    width: 50%;
-  }
 }

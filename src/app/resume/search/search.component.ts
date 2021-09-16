@@ -9,23 +9,24 @@ import { UsersService } from 'src/app/services/users.service';
   styleUrls: ['./search.component.css'],
 })
 export class SearchComponent implements OnInit {
-  // resumes : [Object];
+  success: any;
+  err: any;
   constructor(public usersService: UsersService, private router: Router) {}
 
   ngOnInit(): void {}
 
   onSearch(form: NgForm) {
     if (form.invalid) {
-      console.log('form not valid!!');
+      this.err = 'Please fill the required details correctly';
       return;
     }
     try {
       this.router.navigate(['/template', form.value.username]);
     } catch (err: any) {
       if (err.status == 401) {
-        alert(err);
+        this.err = 'Not authorised to access resume';
       } else {
-        alert('Resume does not exist!!');
+        this.err = 'Resume does not exist';
       }
     }
   }

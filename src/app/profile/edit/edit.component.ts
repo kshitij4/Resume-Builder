@@ -11,6 +11,9 @@ import { dataDisplay } from '../profile-model';
   styleUrls: ['./edit.component.css'],
 })
 export class EditComponent implements OnInit {
+  success: any;
+  err: any;
+
   data: dataDisplay;
   myForm: FormGroup;
   constructor(
@@ -55,12 +58,21 @@ export class EditComponent implements OnInit {
 
   onUpdate() {
     if (this.myForm.invalid) {
-      console.log('Form not valid');
+      document.body.scrollTop = 0;
+      this.err = 'Form not valid';
       return;
     }
     this.userService.updateProfile(this.myForm.value).subscribe(
-      (res) => { alert(res);},
-      (err) => { console.log(err)}
+      (res) => {
+        document.body.scrollTop = 0;
+        this.err = null;
+        this.success = res;
+      },
+      (err) => {
+        document.body.scrollTop = 0;
+        this.success = null;
+        this.err = 'Server Error';
+      }
     );
   }
 }

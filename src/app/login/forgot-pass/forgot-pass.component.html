@@ -1,14 +1,14 @@
 <mat-toolbar class="mat-elevation-z4"><p>Forgot Password</p></mat-toolbar>
 
-<div class="success" *ngIf="message">
-  <p class="alert alert-success">{{ message }}</p>
+<div class="success" *ngIf="success">
+  <p class="alert alert-success">{{ success }}</p>
 </div>
 
 <div class="error" *ngIf="err">
   <p class="alert alert-danger">{{ err }}</p>
 </div>
 
-<mat-card *ngIf="!message">
+<mat-card *ngIf="!success">
   <form (submit)="onSubmit(ForPasForm)" #ForPasForm="ngForm">
     <mat-form-field appearance="outline">
       <mat-label>Email</mat-label>
@@ -17,6 +17,7 @@
         name="email"
         placeholder="Enter your valid email to reset password"
         matInput
+        email
         ngModel
         required
       /> </mat-form-field

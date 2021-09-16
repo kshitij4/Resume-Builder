@@ -77,13 +77,18 @@ export class TemplateComponent implements OnInit {
     }
   }
 
-  displayIcon: boolean = true;
+  onUpdate() {
+    try {
+      const username = this.active.snapshot.paramMap.get('username');
+      this.router.navigate(['/template/update', username]);
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
   @ViewChild('contentToConvert', { static: false })
   contentToConvert!: ElementRef;
   public downloadPdf() {
-    this.displayIcon = false;
-    var _this = this;
     let filename = this.data.firstname;
     const doc = new jsPDF('p', 'mm', 'a4');
     var width = doc.internal.pageSize.getWidth();
@@ -94,7 +99,6 @@ export class TemplateComponent implements OnInit {
       var img = canvas.toDataURL('image/png');
       doc.addImage(img, 'PNG', 0, 0.1, width, height);
       doc.save(`${filename}_Resume.pdf`);
-       _this.displayIcon = true;
     });
   }
 }

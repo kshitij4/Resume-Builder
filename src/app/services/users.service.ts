@@ -73,6 +73,14 @@ export class UsersService {
     return this.http.get(`${this.uri}/post/resume/${username}`);
   }
 
+  updateResume(username: any, body: any) {
+    return this.http.patch<any>(`${this.uri}/post/update/${username}`, body, {
+      observe: 'body',
+      withCredentials: true,
+      headers: new HttpHeaders().append('Content-Type', 'application/json'),
+    });
+  }
+
   isLogged() {
     return !!localStorage.getItem('token');
   }

@@ -1,12 +1,20 @@
 <mat-toolbar><p>Register Page</p></mat-toolbar>
+<div class="success" *ngIf="success">
+  <p class="alert alert-success">{{ success }}</p>
+</div>
+
+<div class="error" *ngIf="err">
+  <p class="alert alert-danger">{{ err }}</p>
+</div>
 <mat-card>
   <form (submit)="onRegister(signupform)" #signupform="ngForm">
+    <mat-label>First name</mat-label>
     <mat-form-field appearance="outline">
       <input
         type="text"
         matInput
         ngModel
-        placeholder="First Name"
+        placeholder="Enter your first name"
         name="fname"
         required
         #fname="ngModel"
@@ -15,12 +23,13 @@
         >Enter valid name</mat-error
       > </mat-form-field
     ><br />
+    <mat-label>Last name</mat-label>
     <mat-form-field appearance="outline">
       <input
         type="text"
         matInput
         ngModel
-        placeholder="Last Name"
+        placeholder="Enter your last name"
         name="lname"
         #lname="ngModel"
       />
@@ -28,13 +37,14 @@
         >Enter valid name</mat-error
       > </mat-form-field
     ><br />
+    <mat-label>Email</mat-label>
     <mat-form-field appearance="outline">
       <input
         type="email"
         matInput
         ngModel
         email
-        placeholder="Email"
+        placeholder="Enter a valid email address"
         name="email"
         required
         #email="ngModel"
@@ -42,13 +52,15 @@
         >Enter valid email</mat-error
       > </mat-form-field
     ><br />
+    <mat-label>Gender</mat-label><br />
     <div class="radio-inline">
       <input type="radio" ngModel name="gender" value="male" />Male
     </div>
     <div class="radio-inline">
       <input type="radio" ngModel name="gender" value="female" />Female<br />
     </div>
-    <br />
+    <br /><br />
+    <mat-label>Phone</mat-label>
     <mat-form-field appearance="outline">
       <input
         type="tel"
@@ -59,41 +71,45 @@
         #phone="ngModel"
       /><mat-error *ngIf="phone.invalid">Enter valid phone number</mat-error>
     </mat-form-field>
+    <mat-label>Age</mat-label>
     <mat-form-field appearance="outline">
       <input
         type="number"
         name="age"
         ngModel
         matInput
-        placeholder="Age"
+        placeholder="Enter your age in years"
         #age="ngModel"
       />
       <mat-error *ngIf="age.invalid"
         >Enter valid age</mat-error
       > </mat-form-field
     ><br />
+    <mat-label>Password</mat-label>
     <mat-form-field appearance="outline">
       <input
         type="password"
         name="pass"
         matInput
         ngModel
-        placeholder="Password"
+        placeholder="Enter valid password"
         required
         pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
         #pass="ngModel"
       />
       <mat-error *ngIf="pass.invalid"
-        >Enter valid password</mat-error
+        >Enter valid password.Must have 1 uppercase,1 lowercase letter,1 number,
+        1 special char and atleast 8 characters</mat-error
       > </mat-form-field
-    ><br />
+    ><br /><br />
+    <mat-label>Confirm Password</mat-label>
     <mat-form-field appearance="outline">
       <input
         type="password"
         matInput
         ngModel
         name="cpass"
-        placeholder="Confirm Password"
+        placeholder="Re-enter Password"
         required
         #cpass="ngModel"
       />

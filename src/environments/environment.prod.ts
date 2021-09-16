@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  uri: 'https://mean-project-heroku.herokuapp.com'
+  uri: 'https://resume-builder-mean.herokuapp.com',
 };

@@ -1,17 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormArray, FormBuilder } from '@angular/forms';
-import { Router } from '@angular/router';
-import { UsersService } from '../services/users.service';
+import {
+  FormBuilder,
+  FormGroup,
+  FormArray,
+  SelectControlValueAccessor,
+} from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { UsersService } from 'src/app/services/users.service';
 
 @Component({
-  selector: 'app-resume',
-  templateUrl: './resume.component.html',
-  styleUrls: ['./resume.component.css'],
+  selector: 'app-update',
+  templateUrl: './update.component.html',
+  styleUrls: ['./update.component.css'],
 })
-export class ResumeComponent implements OnInit {
+export class UpdateComponent implements OnInit {
   err: any;
   success: any;
-
   sproficiency = ['Beginner', 'Intermediate', 'Proficient', 'Expert'];
   lproficiency = ['Elementary', 'Professional', 'Native / Bilingual'];
 
@@ -19,7 +23,8 @@ export class ResumeComponent implements OnInit {
   constructor(
     private usersService: UsersService,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private active: ActivatedRoute
   ) {}
 
   get education(): FormArray {
@@ -80,6 +85,7 @@ export class ResumeComponent implements OnInit {
       hobbie: '',
     });
   }
+
   ngOnInit() {
     this.myForm = this.fb.group({
       username: '',
@@ -97,6 +103,35 @@ export class ResumeComponent implements OnInit {
       projects: this.fb.array([this.proGrp()]),
       languages: this.fb.array([this.langGrp()]),
     });
+
+    this.active.data.subscribe(
+      (res) => {
+        this.setValues(res.resumeData);
+      },
+      (err) => {
+        console.error(err.error);
+        this.router.navigate(['/search']);
+      }
+    );
+  }
+
+  setValues(data: any) {
+    this.myForm.patchValue({
+      username: data.username,
+      firstname: data.firstname,
+      lastname: data.lastname,
+      profession: data.profession,
+      email: data.email,
+      phone: data.phone,
+      address: data.address,
+      intro: data.intro,
+      hobbies: data.hobbies,
+      experience: data.experience,
+      education: data.education,
+      skills: data.skills,
+      projects: data.projects,
+      languages: data.languages,
+    });
   }
 
   onSubmit() {
@@ -104,20 +139,30 @@ export class ResumeComponent implements OnInit {
       this.err = 'Please fill the required details correctly';
       return;
     }
-    this.usersService.submitResume(JSON.stringify(this.myForm.value)).subscribe(
-      (data) => {
-        console.log('Form data: ' + JSON.stringify(this.myForm.value));
-        this.err = null;
-        this.success = data;
-        this.myForm.reset();
-        this.router.navigate(['/search']);
-      },
-      (err) => {
-        console.error(err.error);
-        this.success = null;
-        this.err = 'Internal Server Error';
-      }
-    );
+    console.log(this.myForm.value);
+    this.router.navigate([
+      '/template',
+      this.active.snapshot.paramMap.get('username'),
+    ]);
+    // this.usersService
+    //   .updateResume(
+    //     this.active.snapshot.paramMap.get('username'),
+    //     JSON.stringify(this.myForm.value)
+    //   )
+    //   .subscribe(
+    //     (data) => {
+    //       this.success = data;
+    //       this.myForm.reset();
+    //       this.router.navigate([
+    //         '/template',
+    //         this.active.snapshot.paramMap.get('username'),
+    //       ]);
+    //     },
+    //     (err) => {
+    //       console.error(err.error);
+    //       this.err = 'Internal server error';
+    //     }
+    //   );
   }
 
   onAddExp() {

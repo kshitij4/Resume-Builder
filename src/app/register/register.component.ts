@@ -9,22 +9,32 @@ import { UsersService } from '../services/users.service';
   styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent implements OnInit {
+  success: any;
+  err: any;
   constructor(private router: Router, private usersService: UsersService) {}
   ngOnInit(): void {}
 
   onRegister(form: NgForm) {
-    if (form.invalid || form.value.pass !== form.value.cpass) {
-      alert('Invalid Credentials');
+    if (form.invalid) {
+      window.scrollTo(0, 0);
+      this.err = 'Please fill the required details correctly';
       return;
+    }
+    if (form.value.pass !== form.value.cpass) {
+      this.err = 'Passwords do not match';
     }
     this.usersService.register(JSON.stringify(form.value)).subscribe(
       (data) => {
-        form.resetForm(),
-        alert('Registered Successfully!'),
-        this.router.navigate(['/login'])
+        window.scrollTo(0, 0);
+        this.err = null;
+        form.resetForm();
+        this.success = data;
       },
       (err) => {
-        console.log(err), alert(err.error);
+        window.scrollTo(0, 0);
+        console.log(err.error);
+        this.success = null;
+        this.err = 'Internal Server Error';
       }
     );
   }

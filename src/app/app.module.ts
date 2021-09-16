@@ -34,6 +34,7 @@ import { EditComponent } from './profile/edit/edit.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ForgotPassComponent } from './login/forgot-pass/forgot-pass.component';
 import { ResetPassComponent } from './login/reset-pass/reset-pass.component';
+import { UpdateComponent } from './resume/update/update.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { ResetPassComponent } from './login/reset-pass/reset-pass.component';
     EditComponent,
     ForgotPassComponent,
     ResetPassComponent,
+    UpdateComponent,
   ],
   imports: [
     BrowserModule,

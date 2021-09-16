@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UsersService } from 'src/app/services/users.service';
 
 @Component({
@@ -14,24 +14,28 @@ export class ResetPassComponent implements OnInit {
   err: any;
   constructor(
     public usersService: UsersService,
-    private active: ActivatedRoute
+    private active: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
+    if (this.usersService.isLogged()) {
+      this.router.navigate(['/resume']);
+      return;
+    }
     this.active.data.subscribe(
       (res) => {
         this.email = res.userEmail;
       },
       (err) => {
         this.err = err.error;
-        console.log(err.message);
       }
     );
   }
 
   onSubmit(form: NgForm) {
     if (form.invalid) {
-      this.err = 'Form not valid';
+      this.err = 'Please fill the required details correctly';
       return;
     }
     if (form.value.pass !== form.value.cpass) {
@@ -52,7 +56,7 @@ export class ResetPassComponent implements OnInit {
         },
         (err) => {
           console.log(err);
-          this.err = 'Server Error';
+          this.err = 'Internal Server Error';
         }
       );
   }
