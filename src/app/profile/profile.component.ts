@@ -31,7 +31,7 @@ export class ProfileComponent implements OnInit {
             this.router.navigate(['./logout']);
           }
         } else {
-          this.err = err.error;
+          this.err = 'Something went wrong';
         }
       }
     );

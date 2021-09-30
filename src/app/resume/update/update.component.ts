@@ -136,14 +136,24 @@ export class UpdateComponent implements OnInit {
 
   onSubmit() {
     if (this.myForm.invalid) {
+      window.scrollTo(0, 0);
       this.err = 'Please fill the required details correctly';
       return;
     }
     console.log(this.myForm.value);
-    this.router.navigate([
-      '/template',
-      this.active.snapshot.paramMap.get('username'),
-    ]);
+    window.scrollTo(0, 0);
+    this.err = null;
+    this.success = 'Resume Updated successfully';
+    setTimeout(
+      () => (this.success = 'You will be redirected to your resume now'),
+      1000
+    );
+    setTimeout(() => {
+      this.router.navigate([
+        '/template',
+        this.active.snapshot.paramMap.get('username'),
+      ]);
+    }, 2000);
     // this.usersService
     //   .updateResume(
     //     this.active.snapshot.paramMap.get('username'),
@@ -151,16 +161,22 @@ export class UpdateComponent implements OnInit {
     //   )
     //   .subscribe(
     //     (data) => {
+    //       window.scrollTo(0, 0);
+    //       this.err = null;
     //       this.success = data;
-    //       this.myForm.reset();
-    //       this.router.navigate([
-    //         '/template',
-    //         this.active.snapshot.paramMap.get('username'),
-    //       ]);
+    //       setTimeout(() => this.success = 'You will be redirected to your resume now', 1000);
+    //       setTimeout(() => {
+    //         this.router.navigate([
+    //           '/template',
+    //           this.active.snapshot.paramMap.get('username'),
+    //         ]);
+    //       }, 2000);
     //     },
     //     (err) => {
     //       console.error(err.error);
-    //       this.err = 'Internal server error';
+    //       window.scrollTo(0, 0);
+    //       this.success = null;
+    //       this.err = 'Something went wrong';
     //     }
     //   );
   }

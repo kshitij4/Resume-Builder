@@ -42,6 +42,8 @@ export class EditComponent implements OnInit {
           if (err.status == 401) {
             this.router.navigate(['./logout']);
           }
+        } else {
+          this.err = 'Something went wrong';
         }
       }
     );
@@ -58,20 +60,20 @@ export class EditComponent implements OnInit {
 
   onUpdate() {
     if (this.myForm.invalid) {
-      document.body.scrollTop = 0;
-      this.err = 'Form not valid';
+      window.scrollTo(0, 0);
+      this.err = 'Please fill the required details correctly';
       return;
     }
     this.userService.updateProfile(this.myForm.value).subscribe(
       (res) => {
-        document.body.scrollTop = 0;
+        window.scrollTo(0, 0);
         this.err = null;
         this.success = res;
       },
       (err) => {
-        document.body.scrollTop = 0;
+        window.scrollTo(0, 0);
         this.success = null;
-        this.err = 'Server Error';
+        this.err = 'Something went wrong';
       }
     );
   }

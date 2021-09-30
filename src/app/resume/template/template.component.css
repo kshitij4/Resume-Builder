@@ -60,11 +60,11 @@ p {
 .download {
   color: #4255c0;
   position: sticky;
-  left: 85%;
-  bottom: 20px;
+  left: 87%;
+  bottom: 80px;
   display: inline;
   height: 50px;
-  width: 50px;
+  width: 120px;
   border-radius: 50%;
   background-color: white;
   border: 2px solid #4255c0;
@@ -72,11 +72,11 @@ p {
 .update {
   color: #4255c0;
   position: sticky;
-  left: 90%;
+  left: 87%;
   bottom: 20px;
   display: inline;
   height: 50px;
-  width: 50px;
+  width: 120px;
   border-radius: 50%;
   background-color: white;
   border: 2px solid #4255c0;
@@ -271,15 +271,12 @@ p {
   background: #4255c0;
 }
 @media (max-width: 1071.2px) {
-  .download {
-    display: inline-block;
-    bottom: 80px;
-    left: 90%;
+  .download, .update{
+    left: 85%;
+    width: 50px;
   }
-
-  .update {
-    display: inline-block;
-    bottom: 20px;
+  .btn-txt{
+    display: none;
   }
 }
 @media (max-width: 767.98px) {

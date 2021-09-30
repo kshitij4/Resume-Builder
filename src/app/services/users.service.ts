@@ -73,6 +73,10 @@ export class UsersService {
     return this.http.get(`${this.uri}/post/resume/${username}`);
   }
 
+  getUserResumes(){
+    return this.http.get(`${this.uri}/post/userResumes`);
+  }
+
   updateResume(username: any, body: any) {
     return this.http.patch<any>(`${this.uri}/post/update/${username}`, body, {
       observe: 'body',

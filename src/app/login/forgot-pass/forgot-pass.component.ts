@@ -24,19 +24,15 @@ export class ForgotPassComponent implements OnInit {
       this.err = 'Please fill the required details correctly';
       return;
     }
-    try {
-      this.usersService.forgetPass({ email: form.value.email }).subscribe(
-        (data) => {
-          this.err = null;
-          this.success = data;
-        },
-        (err) => {
-          console.log(err);
-          this.err = err.error;
-        }
-      );
-    } catch (err: any) {
-      console.log(err.error);
-    }
+    this.usersService.forgetPass({ email: form.value.email }).subscribe(
+      (data) => {
+        this.err = null;
+        this.success = data;
+      },
+      (err) => {
+        console.log(err);
+        this.err = 'Something went wrong';
+      }
+    );
   }
 }

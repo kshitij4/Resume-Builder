@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  uri: 'http://127.0.0.1:8000'
+  uri: 'http://127.0.0.1:8000',
+  // uri: 'https://resume-builder-back.herokuapp.com'
 };
 
 /*

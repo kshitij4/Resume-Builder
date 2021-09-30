@@ -1,29 +1,62 @@
-button {
-  width: 100%;
-}
-mat-toolbar,
-mat-card,
-.success,
-.err {
-  width: 25%;
+mat-toolbar{
+  width: 45%;
   margin: auto;
   margin-top: 2rem;
 }
-mat-toolbar,
-mat-card {
-  background-color: white;
+mat-card{
+  padding: 4px;
 }
-mat-form-field {
-  width: 100%;
+.content {
+  padding: 20px;
 }
-.mat-radio-button ~ .mat-radio-button {
-  margin-left: 16px;
+.noResume{
+  font-size: large;
+  text-align: center;
+  padding: 30px;
+  margin: 20px;
 }
-@media (max-width: 700px) {
-  mat-toolbar,
-  mat-card,
-  .success,
-  .err {
-    width: 50%;
-  }
+a {
+  color: #4255c0;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+  color: #1f014e;
+}
+a:focus {
+  text-decoration: none;
+}
+
+.sidebar-wrapper {
+  background: #4255c0;
+  color: #fff;
+}
+.sidebar-wrapper a {
+  color: #fff;
+}
+.sidebar-wrapper .profile-container {
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.2);
+  text-align: center;
+  color: #fff;
+}
+.sidebar-wrapper .name {
+  margin-top: 0;
+}
+.sidebar-wrapper .tagline {
+  color: rgba(255, 255, 255, 0.6);
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.sidebar-wrapper .contact-list li {
+  margin-bottom: 15px;
+}
+.sidebar-wrapper .contact-list li:last-child {
+  margin-bottom: 0;
+}
+.sidebar-wrapper .contact-list .email .svg-inline--fa {
+  font-size: 14px;
+}
+.sidebar-wrapper .container-block {
+  padding: 10px;
 }

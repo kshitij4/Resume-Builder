@@ -28,7 +28,7 @@ export class ResetPassComponent implements OnInit {
         this.email = res.userEmail;
       },
       (err) => {
-        this.err = err.error;
+        this.err = 'Something went wrong';
       }
     );
   }
@@ -56,7 +56,7 @@ export class ResetPassComponent implements OnInit {
         },
         (err) => {
           console.log(err);
-          this.err = 'Internal Server Error';
+          this.err = 'Something went wrong';
         }
       );
   }

@@ -101,12 +101,14 @@ export class ResumeComponent implements OnInit {
 
   onSubmit() {
     if (this.myForm.invalid) {
+      window.scrollTo(0, 0);
       this.err = 'Please fill the required details correctly';
       return;
     }
     this.usersService.submitResume(JSON.stringify(this.myForm.value)).subscribe(
       (data) => {
         console.log('Form data: ' + JSON.stringify(this.myForm.value));
+        window.scrollTo(0, 0);
         this.err = null;
         this.success = data;
         this.myForm.reset();
@@ -114,8 +116,9 @@ export class ResumeComponent implements OnInit {
       },
       (err) => {
         console.error(err.error);
+        window.scrollTo(0, 0);
         this.success = null;
-        this.err = 'Internal Server Error';
+        this.err = 'Something went wrong';
       }
     );
   }

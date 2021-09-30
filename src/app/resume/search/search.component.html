@@ -1,20 +1,55 @@
-<mat-toolbar class="mat-elevation-z4"><p>Search Resumes</p></mat-toolbar>
+<mat-toolbar ><b>Your Resumes</b></mat-toolbar>
 
-<div class="error" *ngIf="err">
+<div class="err" *ngIf="err">
   <p class="alert alert-danger">{{ err }}</p>
 </div>
-<mat-card>
-  <form (submit)="onSearch(searchForm)" #searchForm="ngForm">
-    <mat-form-field appearance="outline">
-      <input
-        type="text"
-        name="username"
-        placeholder="Enter your username to search resume"
-        matInput
-        ngModel
-        required
-      /> </mat-form-field
-    ><br />
-    <button mat-raised-button color="primary" type="submit">Search</button>
-  </form>
-</mat-card>
+
+<div class="content">
+  <div fxLayout="row wrap"  fxLayoutGap = "16px grid">
+    <div fxFlex = "25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor = "let data of resumes"
+    style="cursor: pointer;" (click) = "onResumeClick(data.username)">
+      <mat-card class="mat-elevation-z4">
+        <b style="letter-spacing: 2px; padding-left: 2px;">Username : {{data.username}}</b>
+        <div class="sidebar-wrapper">
+          <div class="profile-container">
+            <h1 class="name">{{ data.firstname }} {{ data.lastname }}</h1>
+            <h3 class="tagline">{{ data.profession }}</h3>
+          </div>
+          <div class="contact-container container-block">
+            <ul class="list-unstyled contact-list">
+              <li class="email">
+                <span
+                  >
+                    <mat-icon aria-hidden="true" aria-label="Example email icon"
+                      >email</mat-icon
+                    >
+                    {{ data.email }}</span
+                >
+              </li>
+    
+              <li class="phone">
+                <mat-icon aria-hidden="true" aria-label="Example phone icon"
+                    >phone</mat-icon
+                  >
+                  {{ data.phone }}
+              </li>
+              <li class="address">
+                <span
+                  ><mat-icon aria-hidden="true" aria-label="Example address icon"
+                    >room</mat-icon
+                  >
+                  {{ data.address }}</span
+                >
+              </li>
+            </ul>
+          </div>
+        </div>        
+      </mat-card>
+    </div>
+  </div>
+</div>
+
+<div class="noResume" *ngIf = "isNull">
+  <p class="alert alert-danger">You have no Resumes currently. 
+    <a [routerLink]="'/resume'">Create One</a></p>
+</div>

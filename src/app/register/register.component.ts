@@ -34,7 +34,7 @@ export class RegisterComponent implements OnInit {
         window.scrollTo(0, 0);
         console.log(err.error);
         this.success = null;
-        this.err = 'Internal Server Error';
+        this.err = 'Something went wrong';
       }
     );
   }
