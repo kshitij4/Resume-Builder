@@ -24,3 +24,9 @@ mat-form-field {
 .mat-radio-button ~ .mat-radio-button {
   margin-left: 16px;
 }
+.formgroup{
+  border: 1px solid rgb(199, 196, 196);
+  border-radius: 2%;
+  padding: 10px;
+  margin: 5px;
+}

@@ -88,7 +88,7 @@ export class UpdateComponent implements OnInit {
 
   ngOnInit() {
     this.myForm = this.fb.group({
-      username: '',
+      username: [{value: '',disabled: true }],
       firstname: '',
       lastname: '',
       profession: '',
@@ -106,32 +106,48 @@ export class UpdateComponent implements OnInit {
 
     this.active.data.subscribe(
       (res) => {
-        this.setValues(res.resumeData);
+        // this.setValues(res.resumeData);
+        const data = res.resumeData;
+        console.log("data: ",data);
+        
+        const exps = this.myForm.get('experience') as FormArray;
+        const edus = this.myForm.get('education') as FormArray;
+        const skills = this.myForm.get('skills') as FormArray;
+        const projects = this.myForm.get('projects') as FormArray;
+        const langs = this.myForm.get('languages') as FormArray;
+        const hobbies = this.myForm.get('hobbies') as FormArray;
+        while (exps.length) {
+          exps.removeAt(0);
+        }
+        while (edus.length) {
+          edus.removeAt(0);
+        }
+        while (skills.length) {
+          skills.removeAt(0);
+        }
+        while (projects.length) {
+          projects.removeAt(0);
+        }
+        while (langs.length) {
+          langs.removeAt(0);
+        }
+        while (hobbies.length) {
+          hobbies.removeAt(0);
+        }
+        this.myForm.patchValue(data);
+
+        data.experience.forEach( (val:any) => this.experience.push(this.fb.group(val)));
+        data.education.forEach( (val:any) => this.education.push(this.fb.group(val)));
+        data.skills.forEach( (val:any) => this.skills.push(this.fb.group(val)));
+        data.projects.forEach( (val:any) => this.projects.push(this.fb.group(val)));
+        data.languages.forEach( (val:any) => this.languages.push(this.fb.group(val)));
+        data.hobbies.forEach( (val:any) => this.hobbies.push(this.fb.group(val)));
       },
       (err) => {
         console.error(err.error);
         this.router.navigate(['/search']);
       }
     );
-  }
-
-  setValues(data: any) {
-    this.myForm.patchValue({
-      username: data.username,
-      firstname: data.firstname,
-      lastname: data.lastname,
-      profession: data.profession,
-      email: data.email,
-      phone: data.phone,
-      address: data.address,
-      intro: data.intro,
-      hobbies: data.hobbies,
-      experience: data.experience,
-      education: data.education,
-      skills: data.skills,
-      projects: data.projects,
-      languages: data.languages,
-    });
   }
 
   onSubmit() {
@@ -141,44 +157,31 @@ export class UpdateComponent implements OnInit {
       return;
     }
     console.log(this.myForm.value);
-    window.scrollTo(0, 0);
-    this.err = null;
-    this.success = 'Resume Updated successfully';
-    setTimeout(
-      () => (this.success = 'You will be redirected to your resume now'),
-      1000
-    );
-    setTimeout(() => {
-      this.router.navigate([
-        '/template',
+    this.usersService
+      .updateResume(
         this.active.snapshot.paramMap.get('username'),
-      ]);
-    }, 2000);
-    // this.usersService
-    //   .updateResume(
-    //     this.active.snapshot.paramMap.get('username'),
-    //     JSON.stringify(this.myForm.value)
-    //   )
-    //   .subscribe(
-    //     (data) => {
-    //       window.scrollTo(0, 0);
-    //       this.err = null;
-    //       this.success = data;
-    //       setTimeout(() => this.success = 'You will be redirected to your resume now', 1000);
-    //       setTimeout(() => {
-    //         this.router.navigate([
-    //           '/template',
-    //           this.active.snapshot.paramMap.get('username'),
-    //         ]);
-    //       }, 2000);
-    //     },
-    //     (err) => {
-    //       console.error(err.error);
-    //       window.scrollTo(0, 0);
-    //       this.success = null;
-    //       this.err = 'Something went wrong';
-    //     }
-    //   );
+        JSON.stringify(this.myForm.value)
+      )
+      .subscribe(
+        (data) => {
+          window.scrollTo(0, 0);
+          this.err = null;
+          this.success = data;
+          setTimeout(() => this.success = 'You will be redirected to your resume now', 1000);
+          setTimeout(() => {
+            this.router.navigate([
+              '/template',
+              this.active.snapshot.paramMap.get('username'),
+            ]);
+          }, 2000);
+        },
+        (err) => {
+          console.error(err.error);
+          window.scrollTo(0, 0);
+          this.success = null;
+          this.err = 'Something went wrong';
+        }
+      );
   }
 
   onAddExp() {

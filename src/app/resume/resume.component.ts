@@ -115,7 +115,7 @@ export class ResumeComponent implements OnInit {
         this.router.navigate(['/search']);
       },
       (err) => {
-        console.error(err.error);
+        console.error(err);
         window.scrollTo(0, 0);
         this.success = null;
         this.err = 'Something went wrong';
